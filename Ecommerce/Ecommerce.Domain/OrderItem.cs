@@ -11,15 +11,15 @@ namespace Ecommerce.Domain
     {
         public int Id { get; set; }
 
-        public int OrderId { get; set; }  // 1
+        public int OrderId { get; set; }  
         public Order Order { get; set; }
 
-        public int ProductId { get; set; }  // 1 
+        public int ProductId { get; set; } 
         public Product Product { get; set; }
 
-        public int Quantity { get; set; } // 2
+        public int Quantity { get; set; } 
 
         [Required]
-        public decimal UnitPrice { get; set; } //200
+        public decimal UnitPrice { get; set; } 
     }
 }

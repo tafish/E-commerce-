@@ -15,7 +15,7 @@ namespace Ecommerce.Domain
         public int Rating { get; set; }
 
         [MaxLength(1000)]
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
