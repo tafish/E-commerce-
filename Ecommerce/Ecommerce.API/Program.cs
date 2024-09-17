@@ -1,3 +1,6 @@
+using Ecommerce.Infrastructure.Presistance;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +11,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+
+
+
+#region Connection String Service
+
+var connectionString = builder.Configuration.GetConnectionString("ApplicationConnection");
+
+builder.Services.AddDbContext<ApplicationContext>(options =>
+options.UseSqlServer(connectionString));
+
+
+#endregion
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
