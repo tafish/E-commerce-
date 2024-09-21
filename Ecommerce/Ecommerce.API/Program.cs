@@ -1,3 +1,4 @@
+using Denizey.BL.Mapper;
 using Ecommerce.Infrastructure.Presistance;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,16 +16,22 @@ var app = builder.Build();
 
 
 
-#region Connection String Service
+//#region Connection String Service
 
-var connectionString = builder.Configuration.GetConnectionString("ApplicationConnection");
+//var connectionString = builder.Configuration.GetConnectionString("ApplicationConnection");
 
-builder.Services.AddDbContext<ApplicationContext>(options =>
-options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<ApplicationContext>(options =>
+//options.UseSqlServer(connectionString));
 
 
-#endregion
+//#endregion
 
+
+//#region Auto Mapper
+
+//builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
+
+//#endregion
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
