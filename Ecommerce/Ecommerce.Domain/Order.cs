@@ -12,7 +12,7 @@ namespace Ecommerce.Domain
         public DateTime OrderDate { get; set; }
 
         [Required]
-        public decimal TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
   
         public int UserId { get; set; }
         public User User { get; set; }

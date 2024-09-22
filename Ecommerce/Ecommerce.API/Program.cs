@@ -16,22 +16,26 @@ var app = builder.Build();
 
 
 
-//#region Connection String Service
+#region Connection String Service
 
-//var connectionString = builder.Configuration.GetConnectionString("ApplicationConnection");
+var connectionString = builder.Configuration.GetConnectionString("ApplicationConnection");
 
-//builder.Services.AddDbContext<ApplicationContext>(options =>
-//options.UseSqlServer(connectionString));
-
-
-//#endregion
+builder.Services.AddDbContext<ApplicationContext>(options =>
+options.UseSqlServer(connectionString));
 
 
-//#region Auto Mapper
+#endregion
+
+
+#region Auto Mapper
 
 //builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 
-//#endregion
+#endregion
+
+
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

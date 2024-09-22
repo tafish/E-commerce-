@@ -19,7 +19,7 @@ namespace Ecommerce.Infrastructure.Services
         }
         public async Task createCategory(Category category)
         {
-            await _context.Categories.AddAsync(new Category() { Id = 1 , Name= "Cat 1" });
+            await _context.Categories.AddAsync(new Category() { Id = 1, Name = "Cat 1" });
         }
 
 

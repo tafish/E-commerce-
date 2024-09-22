@@ -18,7 +18,7 @@ namespace Ecommerce.Domain
         public string Description { get; set; }
 
         [Required]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         [Required]
         public int Stock { get; set; }
