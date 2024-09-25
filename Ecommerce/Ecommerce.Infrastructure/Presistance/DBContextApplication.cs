@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Infrastructure.Presistance
 {
-    public class ApplicationContext :DbContext
+    public class DBContextApplication : DbContext
     {
-
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public DBContextApplication(DbContextOptions<DBContextApplication> options)
            : base(options)
         {
         }
@@ -24,6 +23,24 @@ namespace Ecommerce.Infrastructure.Presistance
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.CategorySeed();
+            modelBuilder.UserSeed();
+
+        
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }

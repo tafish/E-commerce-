@@ -9,7 +9,7 @@ namespace Ecommerce.Application.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        // Additional methods specific to user if needed
         Task AssignRoleToUserAsync(int userId, int roleId);
     }
 }

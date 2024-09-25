@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ecommerce.Infrastructure.Presistance
 {
-    public class DBContextApplicationFactory : IDesignTimeDbContextFactory<ApplicationContext>
+    public class DBContextApplicationFactory : IDesignTimeDbContextFactory<DBContextApplication>
     {
-        public ApplicationContext CreateDbContext(string[] args)
+        public DBContextApplication CreateDbContext(string[] args)
         {
             // Build configuration from appsettings.json
             IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -23,11 +19,11 @@ namespace Ecommerce.Infrastructure.Presistance
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             // Create DbContextOptionsBuilder with the connection string
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<DBContextApplication>();
             optionsBuilder.UseSqlServer(connectionString);  // Adjust for your database provider
 
             // Return a new instance of DBContextApplication
-            return new ApplicationContext(optionsBuilder.Options);
+            return new DBContextApplication(optionsBuilder.Options);
         }
     }
 }

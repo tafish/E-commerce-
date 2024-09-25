@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Application.Contracts.Interface;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,19 +35,19 @@ namespace Ecommerce.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(Category category)
+        public async Task<IActionResult> CreateCategory(DTOCategory category)
         {
             await _categoryService.CreateCategory(category);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategory(int id, Category category)
+        public async Task<IActionResult> UpdateCategory(int id, DTOUpdateCategory category)
         {
             if (id != category.Id)
                 return BadRequest();
 
-            //await _categoryService.UpdateCategory(category);
+            await _categoryService.UpdateCategory(category);
             return Ok();
         }
 
