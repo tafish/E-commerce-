@@ -15,22 +15,22 @@ namespace Ecommerce.Domain
         public string? Name { get; set; }
 
         [Required, MaxLength(1000)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
         [Required]
-        public int Stock { get; set; }
+        public int? Stock { get; set; }
 
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
 
-        public ICollection<Image> Images { get; set; }
-        public ICollection<Review> Reviews { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<Image>? Images { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
+        public ICollection<OrderItem>? OrderItems { get; set; }
 
-        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<CartItem>? CartItems { get; set; }
 
     }
 }

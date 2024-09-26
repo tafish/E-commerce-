@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(DBContextApplication))]
-    [Migration("20240925115242_intMIG")]
-    partial class intMIG
+    [Migration("20240926043156_fulMIG")]
+    partial class fulMIG
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,27 +94,27 @@ namespace Ecommerce.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Cat 1"
+                            Name = "Tsundere"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Cat 2"
+                            Name = "Tsundere"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Cat 3"
+                            Name = "Yandere"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Cat 4"
+                            Name = "Kuudere"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Cat 5"
+                            Name = "Dandere"
                         });
                 });
 
@@ -201,7 +201,7 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -214,10 +214,12 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<double>("Price")
+                    b.Property<double?>("Price")
+                        .IsRequired()
                         .HasColumnType("float");
 
-                    b.Property<int>("Stock")
+                    b.Property<int?>("Stock")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -390,9 +392,7 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.HasOne("Ecommerce.Domain.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });

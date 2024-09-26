@@ -18,12 +18,12 @@ namespace Ecommerce.API
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-
+            services.AddScoped<IProductServicecs, ProductServicecs>();
+            services.AddScoped<IProductRopository, ProductRopository>();
 
             services.AddAutoMapper(typeof(CategoryProfile).Assembly);
 
-            //services.AddAutoMapper(typeof(Program));
-        
+            //services.AddAutoMapper(typeof(Program));       
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return services;
         }

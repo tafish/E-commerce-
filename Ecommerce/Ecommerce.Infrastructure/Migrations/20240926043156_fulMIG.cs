@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecommerce.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class intMIG : Migration
+    public partial class fulMIG : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,8 +61,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         name: "FK_Product_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -215,11 +214,11 @@ namespace Ecommerce.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Cat 1" },
-                    { 2, "Cat 2" },
-                    { 3, "Cat 3" },
-                    { 4, "Cat 4" },
-                    { 5, "Cat 5" }
+                    { 1, "Tsundere" },
+                    { 2, "Tsundere" },
+                    { 3, "Yandere" },
+                    { 4, "Kuudere" },
+                    { 5, "Dandere" }
                 });
 
             migrationBuilder.InsertData(

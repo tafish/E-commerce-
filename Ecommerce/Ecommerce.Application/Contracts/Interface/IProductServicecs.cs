@@ -16,7 +16,7 @@ namespace Ecommerce.Application.Contracts.Interface
 
         public Task CreateProduct(DTOProduct DTOProduct);
 
-        public Task UpdateProduct(DTOUpdateCategory Product);
+        public Task UpdateProduct(DTOProduct Product);
 
         public Task DeleteProduct(int id);
     }
