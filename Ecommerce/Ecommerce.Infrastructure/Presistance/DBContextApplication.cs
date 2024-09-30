@@ -23,6 +23,9 @@ namespace Ecommerce.Infrastructure.Presistance
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<phone> phones { get; set; }
+        public DbSet<visa> visa { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -22,7 +22,7 @@ namespace Ecommerce.Infrastructure.Presistance
 
                 );
 
-           
+
         }
 
         public static void UserSeed(this ModelBuilder modelBuilder)
@@ -37,10 +37,38 @@ namespace Ecommerce.Infrastructure.Presistance
         public static void ProductSeed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
-               new Product() { Id = 1, Description = "tv", Price = 100, Stock = 50},
-               new Product() { Id = 2, Description = "lab", Price = 50, Stock =30 },
-               new Product() { Id = 3, Description = "pc", Price = 200, Stock =30}
+               new Product() { Id = 1, Description = "tv", Price = 100, Stock = 50 },
+               new Product() { Id = 2, Description = "lab", Price = 50, Stock = 30 },
+               new Product() { Id = 3, Description = "pc", Price = 200, Stock = 30 }
                );
         }
+
+        public static void visaSeed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<visa>().HasData(
+               new visa() { id = 1, number =123456 , Evpiry_date = "10-26", type = "ahgfhjyf" },
+               new visa() { id = 2, number =125484 , Evpiry_date = "10-28", type = "veghfsee" },
+               new visa() { id = 3, number =178521 , Evpiry_date = "9-27", type = "fderjhfeee" }
+               );
+        }
+
+        public static void OrderSeed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>().HasData(
+               new Order() { Id = 1, OrderDate = DateTime.Now, TotalAmount = 200, UserId = 1 },
+               new Order() { Id = 2, OrderDate = DateTime.Now, TotalAmount = 5000, UserId = 2 },
+               new Order() { Id = 3, OrderDate = DateTime.Now, TotalAmount = 1750, UserId = 3 }
+               );
+        }
+        public static void phoneSeed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<phone>().HasData(
+               new phone() { id = 1, no = "no", UserId = 1 },
+               new phone() { id = 2, no = "yes", UserId = 2 },
+               new phone() { id = 3, no = "no" , UserId = 3 }
+               );
+        }
+
+
     }
 }
