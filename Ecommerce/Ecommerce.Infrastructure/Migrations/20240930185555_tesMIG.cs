@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecommerce.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class newMIG : Migration
+    public partial class tesMIG : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,7 +51,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -286,6 +286,16 @@ namespace Ecommerce.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "CategoryId", "Description", "Name", "Price", "Stock" },
+                values: new object[,]
+                {
+                    { 1, null, "tv", "Prodact1", 100.0, 50 },
+                    { 2, null, "lab", "Prodact2", 50.0, 30 },
+                    { 3, null, "pc", "Prodact3", 200.0, 30 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "Password" },
                 values: new object[,]
@@ -293,6 +303,36 @@ namespace Ecommerce.Infrastructure.Migrations
                     { 1, "a@gmail.com", "Ahmed", "Mohamed", "123456" },
                     { 2, "ah@gmail.com", "Ibrahim", "Mohamed", "123456" },
                     { 3, "f@gmail.com", "Fath", "Mohamed", "123456" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "OrderDate", "TotalAmount", "UserId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1662), 200.0, 1 },
+                    { 2, new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1707), 5000.0, 2 },
+                    { 3, new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1710), 1750.0, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "phones",
+                columns: new[] { "id", "UserId", "no" },
+                values: new object[,]
+                {
+                    { 1, 1, "no" },
+                    { 2, 2, "yes" },
+                    { 3, 3, "no" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "visa",
+                columns: new[] { "id", "Evpiry_date", "UserId", "number", "type" },
+                values: new object[,]
+                {
+                    { 1, "10-26", 1, 123456, "ahgfhjyf" },
+                    { 2, "10-28", 1, 125484, "veghfsee" },
+                    { 3, "9-27", 1, 178521, "fderjhfeee" }
                 });
 
             migrationBuilder.CreateIndex(

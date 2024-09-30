@@ -1,5 +1,7 @@
 using Ecommerce.API;
+using Ecommerce.Application.Behaviors.Validation;
 using Ecommerce.Infrastructure.Extentions;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 
 
@@ -10,7 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddAPIServices(builder.Configuration);
 
-
+builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryValidator>();
 // Add FluentValidation to MVC
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();

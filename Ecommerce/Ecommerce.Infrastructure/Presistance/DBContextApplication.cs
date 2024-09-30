@@ -32,9 +32,11 @@ namespace Ecommerce.Infrastructure.Presistance
         {
             modelBuilder.CategorySeed();
             modelBuilder.UserSeed();
-
-        
-        }
+            modelBuilder.ProductSeed();
+            modelBuilder.OrderSeed();
+            modelBuilder.visaSeed();
+            modelBuilder.phoneSeed();
+        }   
 
 
 

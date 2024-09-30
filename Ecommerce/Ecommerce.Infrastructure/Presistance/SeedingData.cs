@@ -37,18 +37,18 @@ namespace Ecommerce.Infrastructure.Presistance
         public static void ProductSeed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
-               new Product() { Id = 1, Description = "tv", Price = 100, Stock = 50 },
-               new Product() { Id = 2, Description = "lab", Price = 50, Stock = 30 },
-               new Product() { Id = 3, Description = "pc", Price = 200, Stock = 30 }
+               new Product() { Id = 1,Name = "Prodact1", Description = "tv", Price = 100, Stock = 50 },
+               new Product() { Id = 2, Name = "Prodact2", Description = "lab", Price = 50, Stock = 30 },
+               new Product() { Id = 3, Name = "Prodact3", Description = "pc", Price = 200, Stock = 30 }
                );
         }
 
         public static void visaSeed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<visa>().HasData(
-               new visa() { id = 1, number =123456 , Evpiry_date = "10-26", type = "ahgfhjyf" },
-               new visa() { id = 2, number =125484 , Evpiry_date = "10-28", type = "veghfsee" },
-               new visa() { id = 3, number =178521 , Evpiry_date = "9-27", type = "fderjhfeee" }
+               new visa() { id = 1, number =123456 , Evpiry_date = "10-26", type = "ahgfhjyf", UserId = 1},
+               new visa() { id = 2, number =125484 , Evpiry_date = "10-28", type = "veghfsee",UserId = 1},
+               new visa() { id = 3, number =178521 , Evpiry_date = "9-27", type = "fderjhfeee",UserId =1 }
                );
         }
 

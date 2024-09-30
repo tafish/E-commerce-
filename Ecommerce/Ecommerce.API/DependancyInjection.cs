@@ -22,6 +22,8 @@ namespace Ecommerce.API
             services.AddScoped<IProductRopository, ProductRopository>();
 
             services.AddAutoMapper(typeof(CategoryProfile).Assembly);
+            services.AddAutoMapper(typeof(ProdactProfile).Assembly);
+
 
             //services.AddAutoMapper(typeof(Program));       
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -20,7 +20,7 @@ namespace Ecommerce.Domain
         [Required]
         public double? Price { get; set; }
 
-        [Required]
+    
         public int? Stock { get; set; }
 
         public int? CategoryId { get; set; }

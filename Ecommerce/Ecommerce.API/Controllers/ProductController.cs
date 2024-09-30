@@ -43,7 +43,7 @@ namespace Ecommerce.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, DTOProduct Product)
+        public async Task<IActionResult> UpdateProduct(int id, DTOUpdetProduct Product)
         {
             if (id != Product.Id)
                 return BadRequest();

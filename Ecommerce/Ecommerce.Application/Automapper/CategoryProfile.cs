@@ -10,11 +10,11 @@ namespace Ecommerce.Application.Automapper
     {
         public CategoryProfile() 
         {
-            CreateMap<DTOCategory, Category>()
-            .ForMember(dest => dest.Id, opt=> opt.MapFrom(src => src.Name));
+            CreateMap<DTOCategory, Category>();
+           
 
             CreateMap<DTOUpdateCategory, Category>().ReverseMap();
-            CreateMap<DTOProduct, Product>().ReverseMap();
+          
 
         }
     }

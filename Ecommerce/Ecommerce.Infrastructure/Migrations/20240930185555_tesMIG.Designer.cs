@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(DBContextApplication))]
-    [Migration("20240930111200_newMIG")]
-    partial class newMIG
+    [Migration("20240930185555_tesMIG")]
+    partial class tesMIG
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,6 +192,29 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OrderDate = new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1662),
+                            TotalAmount = 200.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OrderDate = new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1707),
+                            TotalAmount = 5000.0,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            OrderDate = new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1710),
+                            TotalAmount = 1750.0,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.OrderItem", b =>
@@ -249,7 +272,6 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<int?>("Stock")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -257,6 +279,32 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "tv",
+                            Name = "Prodact1",
+                            Price = 100.0,
+                            Stock = 50
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "lab",
+                            Name = "Prodact2",
+                            Price = 50.0,
+                            Stock = 30
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "pc",
+                            Name = "Prodact3",
+                            Price = 200.0,
+                            Stock = 30
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Review", b =>
@@ -367,6 +415,26 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("phones");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            UserId = 1,
+                            no = "no"
+                        },
+                        new
+                        {
+                            id = 2,
+                            UserId = 2,
+                            no = "yes"
+                        },
+                        new
+                        {
+                            id = 3,
+                            UserId = 3,
+                            no = "no"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.visa", b =>
@@ -396,6 +464,32 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("visa");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            Evpiry_date = "10-26",
+                            UserId = 1,
+                            number = 123456,
+                            type = "ahgfhjyf"
+                        },
+                        new
+                        {
+                            id = 2,
+                            Evpiry_date = "10-28",
+                            UserId = 1,
+                            number = 125484,
+                            type = "veghfsee"
+                        },
+                        new
+                        {
+                            id = 3,
+                            Evpiry_date = "9-27",
+                            UserId = 1,
+                            number = 178521,
+                            type = "fderjhfeee"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Address", b =>

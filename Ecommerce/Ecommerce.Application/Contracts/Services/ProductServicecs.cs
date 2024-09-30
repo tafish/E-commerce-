@@ -42,7 +42,7 @@ namespace Ecommerce.Application.Contracts.Services
             return await _ProductRopository.GetByIdAsync(id);
         }
 
-        public async Task UpdateProduct(DTOProduct Product)
+        public async Task UpdateProduct(DTOUpdetProduct Product)
         {
             var catmapModel = _mapper.Map<Product>(Product);
             await _ProductRopository.UpdateAsync(catmapModel);
