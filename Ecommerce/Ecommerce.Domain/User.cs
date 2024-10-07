@@ -26,6 +26,11 @@ namespace Ecommerce.Domain
         public ICollection<Review> Reviews { get; set; }
         public Cart Cart { get; set; }
 
+        public ICollection<ReplyReview> ReplyReviews { get; set; }
+
+        public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
+
+
 
     }
 }

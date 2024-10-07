@@ -26,6 +26,11 @@ namespace Ecommerce.Infrastructure.Presistance
         public DbSet<Address> Addresses { get; set; }
         public DbSet<phone> phones { get; set; }
         public DbSet<visa> visa { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<ReplyReview> ReplyReviews { get; set; }
+        public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
+        
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +41,9 @@ namespace Ecommerce.Infrastructure.Presistance
             modelBuilder.OrderSeed();
             modelBuilder.visaSeed();
             modelBuilder.phoneSeed();
+            modelBuilder.AddressSeed();
+            modelBuilder.ReviewSeed();
+            modelBuilder.BrandSeed();
         }   
 
 

@@ -2,7 +2,6 @@
 using Ecommerce.Domain;
 using Ecommerce.Infrastructure.Presistance;
 
-
 namespace Ecommerce.Infrastructure.Services
 {
     public class UserRepository : Repository<User>, IUserRepository
@@ -14,6 +13,11 @@ namespace Ecommerce.Infrastructure.Services
         // User CRUD Generic
 
         public Task AssignRoleToUserAsync(int userId, int roleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Order>> GetUserOrderHistory(int userid)
         {
             throw new NotImplementedException();
         }

@@ -32,5 +32,7 @@ namespace Ecommerce.Domain
 
         public ICollection<CartItem>? CartItems { get; set; }
 
+        public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
+
     }
 }

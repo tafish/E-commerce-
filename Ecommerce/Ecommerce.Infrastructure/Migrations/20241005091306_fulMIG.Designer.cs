@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(DBContextApplication))]
-    [Migration("20240930185555_tesMIG")]
-    partial class tesMIG
+    [Migration("20241005091306_fulMIG")]
+    partial class fulMIG
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,6 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -53,6 +52,69 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            UserId = 1,
+                            city = "Cairo",
+                            content = "Tsundere",
+                            type = "test1"
+                        },
+                        new
+                        {
+                            id = 2,
+                            UserId = 1,
+                            city = "Alexandria",
+                            content = "Tsundere",
+                            type = "test2"
+                        },
+                        new
+                        {
+                            id = 3,
+                            UserId = 1,
+                            city = "Giza",
+                            content = "Yandere",
+                            type = "test3"
+                        },
+                        new
+                        {
+                            id = 4,
+                            UserId = 1,
+                            city = "Luxor",
+                            content = "Kuudere",
+                            type = "test4"
+                        },
+                        new
+                        {
+                            id = 5,
+                            UserId = 1,
+                            city = "Aswan",
+                            content = "Dandere",
+                            type = "test5"
+                        });
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("logo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Cart", b =>
@@ -116,7 +178,12 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("parentId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("parentId");
 
                     b.ToTable("Categories");
 
@@ -187,6 +254,9 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -197,23 +267,26 @@ namespace Ecommerce.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            OrderDate = new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1662),
+                            OrderDate = new DateTime(2024, 10, 5, 12, 13, 6, 67, DateTimeKind.Local).AddTicks(6519),
                             TotalAmount = 200.0,
-                            UserId = 1
+                            UserId = 1,
+                            status = 0
                         },
                         new
                         {
                             Id = 2,
-                            OrderDate = new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1707),
+                            OrderDate = new DateTime(2024, 10, 5, 12, 13, 6, 67, DateTimeKind.Local).AddTicks(6569),
                             TotalAmount = 5000.0,
-                            UserId = 2
+                            UserId = 2,
+                            status = 0
                         },
                         new
                         {
                             Id = 3,
-                            OrderDate = new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1710),
+                            OrderDate = new DateTime(2024, 10, 5, 12, 13, 6, 67, DateTimeKind.Local).AddTicks(6572),
                             TotalAmount = 1750.0,
-                            UserId = 3
+                            UserId = 3,
+                            status = 0
                         });
                 });
 
@@ -307,6 +380,69 @@ namespace Ecommerce.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.QuestionAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("QuestionAnswers");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.ReplyReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ReviewId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReviewId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ReplyReviews");
+                });
+
             modelBuilder.Entity("Ecommerce.Domain.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -393,6 +529,29 @@ namespace Ecommerce.Infrastructure.Migrations
                             LastName = "Mohamed",
                             Password = "123456"
                         });
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Wishlist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.phone", b =>
@@ -533,6 +692,15 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.Category", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Category", "category")
+                        .WithMany()
+                        .HasForeignKey("parentId");
+
+                    b.Navigation("category");
+                });
+
             modelBuilder.Entity("Ecommerce.Domain.Image", b =>
                 {
                     b.HasOne("Ecommerce.Domain.Product", "Product")
@@ -583,6 +751,38 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.QuestionAnswer", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Product", "Product")
+                        .WithMany("QuestionAnswers")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Ecommerce.Domain.User", "User")
+                        .WithMany("QuestionAnswers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.ReplyReview", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Review", "Review")
+                        .WithMany("ReplyReviews")
+                        .HasForeignKey("ReviewId");
+
+                    b.HasOne("Ecommerce.Domain.User", "User")
+                        .WithMany("ReplyReviews")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Review");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Ecommerce.Domain.Review", b =>
                 {
                     b.HasOne("Ecommerce.Domain.Product", "Product")
@@ -593,6 +793,23 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.HasOne("Ecommerce.Domain.User", "User")
                         .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Wishlist", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Ecommerce.Domain.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -647,7 +864,14 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.Navigation("OrderItems");
 
+                    b.Navigation("QuestionAnswers");
+
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Review", b =>
+                {
+                    b.Navigation("ReplyReviews");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.User", b =>
@@ -656,6 +880,10 @@ namespace Ecommerce.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Orders");
+
+                    b.Navigation("QuestionAnswers");
+
+                    b.Navigation("ReplyReviews");
 
                     b.Navigation("Reviews");
                 });

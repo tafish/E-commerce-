@@ -8,22 +8,42 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecommerce.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class tesMIG : Migration
+    public partial class fulMIG : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Brands",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    logo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brands", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    parentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_parentId",
+                        column: x => x.parentId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +92,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -114,6 +134,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalAmount = table.Column<double>(type: "float", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -190,6 +211,34 @@ namespace Ecommerce.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "QuestionAnswers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuestionAnswers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_QuestionAnswers_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_QuestionAnswers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -212,6 +261,31 @@ namespace Ecommerce.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Wishlists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wishlists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -273,16 +347,42 @@ namespace Ecommerce.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ReplyReviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    ReviewId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReplyReviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReplyReviews_Reviews_ReviewId",
+                        column: x => x.ReviewId,
+                        principalTable: "Reviews",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ReplyReviews_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "Name", "parentId" },
                 values: new object[,]
                 {
-                    { 1, "Tsundere" },
-                    { 2, "Tsundere" },
-                    { 3, "Yandere" },
-                    { 4, "Kuudere" },
-                    { 5, "Dandere" }
+                    { 1, "Tsundere", null },
+                    { 2, "Tsundere", null },
+                    { 3, "Yandere", null },
+                    { 4, "Kuudere", null },
+                    { 5, "Dandere", null }
                 });
 
             migrationBuilder.InsertData(
@@ -306,13 +406,25 @@ namespace Ecommerce.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "OrderDate", "TotalAmount", "UserId" },
+                table: "Addresses",
+                columns: new[] { "id", "UserId", "city", "content", "type" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1662), 200.0, 1 },
-                    { 2, new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1707), 5000.0, 2 },
-                    { 3, new DateTime(2024, 9, 30, 21, 55, 54, 617, DateTimeKind.Local).AddTicks(1710), 1750.0, 3 }
+                    { 1, 1, "Cairo", "Tsundere", "test1" },
+                    { 2, 1, "Alexandria", "Tsundere", "test2" },
+                    { 3, 1, "Giza", "Yandere", "test3" },
+                    { 4, 1, "Luxor", "Kuudere", "test4" },
+                    { 5, 1, "Aswan", "Dandere", "test5" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "OrderDate", "TotalAmount", "UserId", "status" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 10, 5, 12, 13, 6, 67, DateTimeKind.Local).AddTicks(6519), 200.0, 1, 0 },
+                    { 2, new DateTime(2024, 10, 5, 12, 13, 6, 67, DateTimeKind.Local).AddTicks(6569), 5000.0, 2, 0 },
+                    { 3, new DateTime(2024, 10, 5, 12, 13, 6, 67, DateTimeKind.Local).AddTicks(6572), 1750.0, 3, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -357,6 +469,11 @@ namespace Ecommerce.Infrastructure.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Categories_parentId",
+                table: "Categories",
+                column: "parentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_ProductId",
                 table: "Images",
                 column: "ProductId");
@@ -387,6 +504,26 @@ namespace Ecommerce.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_QuestionAnswers_ProductId",
+                table: "QuestionAnswers",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionAnswers_UserId",
+                table: "QuestionAnswers",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReplyReviews_ReviewId",
+                table: "ReplyReviews",
+                column: "ReviewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReplyReviews_UserId",
+                table: "ReplyReviews",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_ProductId",
                 table: "Reviews",
                 column: "ProductId");
@@ -400,6 +537,16 @@ namespace Ecommerce.Infrastructure.Migrations
                 name: "IX_visa_UserId",
                 table: "visa",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_ProductId",
+                table: "Wishlists",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_UserId",
+                table: "Wishlists",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -407,6 +554,9 @@ namespace Ecommerce.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "CartItem");
@@ -421,16 +571,25 @@ namespace Ecommerce.Infrastructure.Migrations
                 name: "phones");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "QuestionAnswers");
+
+            migrationBuilder.DropTable(
+                name: "ReplyReviews");
 
             migrationBuilder.DropTable(
                 name: "visa");
+
+            migrationBuilder.DropTable(
+                name: "Wishlists");
 
             migrationBuilder.DropTable(
                 name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Product");

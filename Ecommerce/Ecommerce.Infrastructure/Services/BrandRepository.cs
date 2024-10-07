@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Infrastructure.Services
 {
-    public class CategoryRepository : Repository<Category> , ICategoryRepository
+    public class BrandRepository : Repository<Brand>, IBrandRepository
     {
-        public CategoryRepository(DBContextApplication context) : base(context)
+        public BrandRepository(DBContextApplication context) : base(context)
         {
         }
-        public Task AddMultiProductsToCategory(int categoryId, int[] productId)
+
+        public Task<List<Product>> DispalyProductsByBrandId(int brandId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Category> GetCategorywithProducts(int categoryId)
+        public Task<List<Brand>> GetBrandwithProductsByBrandId(int brandId)
         {
             throw new NotImplementedException();
         }

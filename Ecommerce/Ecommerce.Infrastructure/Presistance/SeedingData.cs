@@ -1,11 +1,6 @@
 ﻿using Ecommerce.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ecommerce.Infrastructure.Presistance
 {
@@ -14,7 +9,7 @@ namespace Ecommerce.Infrastructure.Presistance
         public static void CategorySeed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-                new Category() { Id = 1, Name = "Tsundere" },
+                new Category() { Id = 1, Name = "Tsundere"},
                 new Category() { Id = 2, Name = "Tsundere" },
                 new Category() { Id = 3, Name = "Yandere" },
                 new Category() { Id = 4, Name = "Kuudere" },
@@ -69,6 +64,37 @@ namespace Ecommerce.Infrastructure.Presistance
                );
         }
 
+        public static void AddressSeed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Address>().HasData(
+                new Address() { id = 1, content = "Tsundere", city = "Cairo", type ="test1", UserId =1},
+                new Address() { id = 2, content = "Tsundere", city = "Alexandria", type = "test2", UserId = 1 },
+                new Address() { id = 3, content = "Yandere", city = "Giza", type = "test3", UserId = 1 },
+                new Address() { id = 4, content = "Kuudere", city = "Luxor", type = "test4", UserId = 1 },
+                new Address() { id = 5, content = "Dandere", city = "Aswan", type = "test5" , UserId = 1 }
 
+                );
+        }
+
+        public static void BrandSeed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Brand>().HasData(
+               new Brand() { Id = 1, Name = "pc", logo = "https://www.google.com/search?sca_esv=6449538529ffda2f&sxsrf=ADLYWIJLPNJcSg8eNexK0snUEW47SvzYNw:1728138541243&q=%D8%B5%D9%88%D8%B1&udm=2&fbs=AEQNm0BIRlNMsRe0SeE1EXtrwm1mjePOoxRIMPk2gPjqOozch23yls1763fqJ-YUzYzv81ep_VHpm7VSSZUvFi5aYRaMWgwTx1IvZn0TMjsKHvXSPj3Lq20Qs0HT-lFx8kMr7C-Xdnb_ZD9v0QliLURUjeuihX9OBcx5nIno_GQ80GQdoSkkYGQrwdyHaxjsiIKHT5dUco2g_gnjtmLEyID0gBja_7LIL3wcI92GyMmCXvnVrVcDCA0&sa=X&ved=2ahUKEwig-_3eufeIAxVoVqQEHdeiB_MQtKgLegQIDhAB&biw=1707&bih=820&dpr=1.13#vhid=Zpu9rWGEwuB5UM&vssid=mosaic" },
+               new Brand() { Id = 2, Name = "micro", logo = "https://www.google.com/search?sca_esv=6449538529ffda2f&sxsrf=ADLYWIJLPNJcSg8eNexK0snUEW47SvzYNw:1728138541243&q=%D8%B5%D9%88%D8%B1&udm=2&fbs=AEQNm0BIRlNMsRe0SeE1EXtrwm1mjePOoxRIMPk2gPjqOozch23yls1763fqJ-YUzYzv81ep_VHpm7VSSZUvFi5aYRaMWgwTx1IvZn0TMjsKHvXSPj3Lq20Qs0HT-lFx8kMr7C-Xdnb_ZD9v0QliLURUjeuihX9OBcx5nIno_GQ80GQdoSkkYGQrwdyHaxjsiIKHT5dUco2g_gnjtmLEyID0gBja_7LIL3wcI92GyMmCXvnVrVcDCA0&sa=X&ved=2ahUKEwig-_3eufeIAxVoVqQEHdeiB_MQtKgLegQIDhAB&biw=1707&bih=820&dpr=1.13#vhid=Zpu9rWGEwuB5UM&vssid=mosaic " },
+               new Brand() { Id = 3, Name = "grel", logo = "https://www.google.com/search?sca_esv=6449538529ffda2f&sxsrf=ADLYWIJLPNJcSg8eNexK0snUEW47SvzYNw:1728138541243&q=%D8%B5%D9%88%D8%B1&udm=2&fbs=AEQNm0BIRlNMsRe0SeE1EXtrwm1mjePOoxRIMPk2gPjqOozch23yls1763fqJ-YUzYzv81ep_VHpm7VSSZUvFi5aYRaMWgwTx1IvZn0TMjsKHvXSPj3Lq20Qs0HT-lFx8kMr7C-Xdnb_ZD9v0QliLURUjeuihX9OBcx5nIno_GQ80GQdoSkkYGQrwdyHaxjsiIKHT5dUco2g_gnjtmLEyID0gBja_7LIL3wcI92GyMmCXvnVrVcDCA0&sa=X&ved=2ahUKEwig-_3eufeIAxVoVqQEHdeiB_MQtKgLegQIDhAB&biw=1707&bih=820&dpr=1.13#vhid=Zpu9rWGEwuB5UM&vssid=mosaic" }
+               );
+        }
+
+        public static void ReviewSeed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Review>().HasData(
+                new Review() { Id = 1, Rating = 1, Comment = "aaaaaaaa", Date = DateTime.Now, ProductId = 1, UserId=1 },
+                new Review() { Id = 2, Rating = 1, Comment = "ssssssss", Date = DateTime.Now, ProductId = 1, UserId = 1 },
+                new Review() { Id = 3, Rating = 2, Comment = "dddddddd", Date = DateTime.Now, ProductId = 2 , UserId = 2 },
+                new Review() { Id = 4, Rating = 3, Comment = "ffffffff", Date = DateTime.Now, ProductId = 2, UserId = 2 },
+                new Review() { Id = 5, Rating = 4, Comment = "gggggggg", Date = DateTime.Now, ProductId = 2, UserId = 1 }
+
+                );
+        }
     }
 }

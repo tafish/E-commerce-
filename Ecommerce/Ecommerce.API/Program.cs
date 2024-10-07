@@ -12,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddAPIServices(builder.Configuration);
 
+
+builder.Services.AddValidatorsFromAssemblyContaining<visaValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<BradValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AssressValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CategoryValidator>();
 // Add FluentValidation to MVC

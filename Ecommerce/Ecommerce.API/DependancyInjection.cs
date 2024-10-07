@@ -20,9 +20,23 @@ namespace Ecommerce.API
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductServicecs, ProductServicecs>();
             services.AddScoped<IProductRopository, ProductRopository>();
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IProductServicecs, ProductServicecs>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IVisaService, VisaService>();
+            services.AddScoped<IVisaRepository, VisaRepository>();
+
+
+
+
 
             services.AddAutoMapper(typeof(CategoryProfile).Assembly);
             services.AddAutoMapper(typeof(ProdactProfile).Assembly);
+            services.AddAutoMapper(typeof(AddressProfile).Assembly);
+            services.AddAutoMapper(typeof(BrandProfile).Assembly);
+            services.AddAutoMapper(typeof(ReviewProfile).Assembly);
+            services.AddAutoMapper(typeof(visaProfile).Assembly);
 
 
             //services.AddAutoMapper(typeof(Program));       
