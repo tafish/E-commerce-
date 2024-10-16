@@ -38,7 +38,7 @@ namespace Ecommerce.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateVisa(DTOvisa visa)
+        public async Task<IActionResult> CreateVisa([FromForm] DTOvisa visa)
         {
             await _VisaService.CreateVisa(visa);
             return Ok();

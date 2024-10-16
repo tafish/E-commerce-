@@ -24,10 +24,15 @@ namespace Ecommerce.API
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IProductServicecs, ProductServicecs>();
             services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IBrandService, BrandServicecs>();
             services.AddScoped<IVisaService, VisaService>();
             services.AddScoped<IVisaRepository, VisaRepository>();
-
-
+            services.AddScoped<IWishlistRepository, WishlistRepository>();
+            services.AddScoped<IWishlistService, WishlistService>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IWishlistRepository, WishlistRepository>();
+            services.AddScoped<IWishlistService, WishlistService>();
 
 
 

@@ -11,6 +11,7 @@ namespace Ecommerce.Application.DTOs
       
         public string city { get; set; }
         public string content { get; set; }
+        public int UserId { get; set; }
         public class DTOUpdateAddress
         {
             public int Id { get; set; }

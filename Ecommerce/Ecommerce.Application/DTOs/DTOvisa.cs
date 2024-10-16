@@ -9,7 +9,7 @@ namespace Ecommerce.Application.DTOs
 {
     public class DTOvisa
     {
-        public int id { get; set; }
+       
         public int number { get; set; }
         public string Evpiry_date { get; set; }
         public string type { get; set; }

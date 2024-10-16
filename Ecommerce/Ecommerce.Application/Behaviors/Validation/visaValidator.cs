@@ -13,10 +13,10 @@ namespace Ecommerce.Application.Behaviors.Validation
         public visaValidator()
         {
 
-            RuleFor(c => c.number).NotNull().LessThanOrEqualTo(14);
+            //RuleFor(c => c.number).NotNull().Equal(14);
        
-            RuleFor(c => c.type).NotNull().WithMessage("Please insert type !")
-             .Length(2, 50).WithMessage("Min chars is 2 and max is 50");
+            //RuleFor(c => c.type).NotNull().WithMessage("Please insert type !")
+            // .Length(2, 50).WithMessage("Min chars is 2 and max is 50");
         }
     }
 }

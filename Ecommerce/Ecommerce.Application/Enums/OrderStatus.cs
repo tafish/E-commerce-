@@ -8,10 +8,10 @@ namespace Ecommerce.Application.Enums
 {
     public enum OrderStatus
     {
-    //    Pendding = 0,
-    //    Approved = 1,
-    //    Delivered = 2,
-    //    Shipped = 3,
-    //    Cancelled = 4
+        Pendding = 0,
+        Approved = 1,
+        Delivered = 2,
+        Shipped = 3,
+        Cancelled = 4
     }
 }
